@@ -1,0 +1,34 @@
+{
+  "event_id": "uuid",
+
+  "event_type": "DATA_CHANGED",
+
+  "service_name": "perencanaan-service",
+
+  "entity_type": "rencana_kinerja",
+  "entity_id": "RK001",
+
+  "action": "CREATE",
+
+  "actor": {
+    "user_id": "keycloak-sub",
+    "username": "ryan"
+  },
+
+  "request": {
+    "request_id": "req-123",
+    "session_id": "session-123"
+  },
+
+  "occurred_at": "2026-09-17T15:30:00+07:00",
+
+  "before": null,
+
+  "after": {
+    "id": "RK001",
+    "nama": "Meningkatkan pelayanan",
+    "tahun": 2026
+  },
+
+  "metadata": {}
+}

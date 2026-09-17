@@ -1,0 +1,258 @@
+basePath: /
+definitions:
+  web.AuditEventResponse:
+    properties:
+      action:
+        example: UPDATE
+        type: string
+      actor_id:
+        example: user-002
+        type: string
+      actor_username:
+        example: operator.opd
+        type: string
+      after:
+        type: object
+      before:
+        type: object
+      created_at:
+        example: "2026-09-17T08:00:01+07:00"
+        type: string
+      entity_id:
+        example: rk-2026-0001
+        type: string
+      entity_type:
+        example: rencana_kinerja
+        type: string
+      event_type:
+        example: DATA_CHANGED
+        type: string
+      id:
+        example: 8f4a2c1e-7b9d-4e62-a3f1-91d8c5b2e704
+        type: string
+      metadata:
+        type: object
+      occurred_at:
+        example: "2026-09-17T08:00:00+07:00"
+        type: string
+      request_id:
+        example: req-004
+        type: string
+      service_name:
+        example: perencanaan-service
+        type: string
+      session_id:
+        example: sess-004
+        type: string
+    type: object
+  web.CreateEventRequest:
+    properties:
+      action:
+        type: string
+      actor_id:
+        type: string
+      actor_username:
+        type: string
+      after: {}
+      before: {}
+      entity_id:
+        type: string
+      entity_type:
+        type: string
+      event_type:
+        type: string
+      metadata:
+        additionalProperties: {}
+        type: object
+      occurred_at:
+        type: string
+      request_id:
+        type: string
+      service_name:
+        type: string
+      session_id:
+        type: string
+    type: object
+  web.ErrorResponse:
+    properties:
+      error: {}
+    type: object
+  web.HealthcheckResponse:
+    properties:
+      status:
+        type: string
+      system_info:
+        $ref: '#/definitions/web.HealthcheckSystemInfo'
+    type: object
+  web.HealthcheckSystemInfo:
+    properties:
+      environment:
+        type: string
+      version:
+        type: string
+    type: object
+  web.Response-array_web_AuditEventResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/web.AuditEventResponse'
+        type: array
+    type: object
+  web.Response-web_AuditEventResponse:
+    properties:
+      data:
+        $ref: '#/definitions/web.AuditEventResponse'
+    type: object
+  web.Response-web_HealthcheckResponse:
+    properties:
+      data:
+        $ref: '#/definitions/web.HealthcheckResponse'
+    type: object
+  web.ValidationErrorResponse:
+    properties:
+      error:
+        additionalProperties:
+          type: string
+        example:
+          tahun: required
+        type: object
+    type: object
+info:
+  contact:
+    name: Kertaskerja Dev Team
+  description: Service snapshot penetapan tujuan, sasaran, renja, rekin untuk pemda,
+    opd, dan individu
+  termsOfService: http://swagger.io/terms/
+  title: Penetapan Service
+  version: "1.0"
+paths:
+  /events:
+    get:
+      consumes:
+      - application/json
+      description: Mengambil audit event berdasarkan filter
+      parameters:
+      - description: Nama service
+        in: query
+        name: service_name
+        type: string
+      - description: Tipe event
+        in: query
+        name: event_type
+        type: string
+      - description: 'Action: CREATE, UPDATE, DELETE'
+        in: query
+        name: action
+        type: string
+      - description: Tipe entity
+        in: query
+        name: entity_type
+        type: string
+      - description: ID entity
+        in: query
+        name: entity_id
+        type: string
+      - description: ID actor
+        in: query
+        name: actor_id
+        type: string
+      - description: Username actor
+        in: query
+        name: actor_username
+        type: string
+      - description: Request ID
+        in: query
+        name: request_id
+        type: string
+      - description: Session ID
+        in: query
+        name: session_id
+        type: string
+      - description: Waktu mulai
+        format: date-time
+        in: query
+        name: occurred_from
+        type: string
+      - description: Waktu akhir
+        format: date-time
+        in: query
+        name: occurred_to
+        type: string
+      - default: 1
+        description: Nomor halaman
+        in: query
+        name: page
+        type: integer
+      - default: 20
+        description: Jumlah data
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Berhasil mengambil audit events
+          schema:
+            $ref: '#/definitions/web.Response-array_web_AuditEventResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ValidationErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ErrorResponse'
+      summary: Get Audit Events
+      tags:
+      - Audit
+    post:
+      consumes:
+      - application/json
+      description: Menyimpan event audit trail
+      parameters:
+      - description: Audit Event
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/web.CreateEventRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Berhasil membuat audit event
+          schema:
+            $ref: '#/definitions/web.Response-web_AuditEventResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.ValidationErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ErrorResponse'
+      summary: Create Audit Event
+      tags:
+      - Audit
+  /healthcheck:
+    get:
+      description: checking if this service is accessible
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.Response-web_HealthcheckResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ErrorResponse'
+      summary: healthcheck
+      tags:
+      - healthcheck
+schemes:
+- http
+- https
+swagger: "2.0"

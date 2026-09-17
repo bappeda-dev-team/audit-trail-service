@@ -1,0 +1,11 @@
+{
+  "action": "DELETE",
+
+  "before": {
+    "id": "RK001",
+    "nama": "Meningkatkan pelayanan",
+    "tahun": 2026
+  },
+
+  "after": null
+}

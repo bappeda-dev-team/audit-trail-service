@@ -1,0 +1,22 @@
+# env file
+.env
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+
+.DS_Store
+.idea
+*.log
+tmp/
+
+
+audit-trail-service
+bin/audit-trail-service

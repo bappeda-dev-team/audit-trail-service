@@ -1,0 +1,13 @@
+{
+  "action": "UPDATE",
+
+  "before": {
+    "nama": "Meningkatkan pelayanan",
+    "target": 100
+  },
+
+  "after": {
+    "nama": "Meningkatkan kualitas pelayanan",
+    "target": 150
+  }
+}
