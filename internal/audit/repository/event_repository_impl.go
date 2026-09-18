@@ -29,7 +29,6 @@ func (repo *EventRepositoryImpl) Create(
 
 	query := `
 		INSERT INTO audit_event (
-			id,
 			project_id,
 			event_type,
 			action,
@@ -59,15 +58,13 @@ func (repo *EventRepositoryImpl) Create(
 			$11,
 			$12,
 			$13,
-			$14,
-			$15
+			$14
 		)
 	`
 
 	_, err := repo.DB.ExecContext(
 		ctx,
 		query,
-		event.ID,
 		event.ProjectId,
 		event.EventType,
 		event.Action,
