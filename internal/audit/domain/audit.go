@@ -11,6 +11,7 @@ const (
 	AuditActionCreate AuditAction = "CREATE"
 	AuditActionUpdate AuditAction = "UPDATE"
 	AuditActionDelete AuditAction = "DELETE"
+	AuditActionClone  AuditAction = "CLONE"
 )
 
 type AuditEvent struct {
