@@ -8,8 +8,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/uuid"
-
 	"github.com/bappeda-dev-team/audit-trail-service/internal/audit/domain"
 	"github.com/bappeda-dev-team/audit-trail-service/internal/audit/repository"
 )
@@ -53,10 +51,6 @@ func (service *EventServiceImpl) CreateEvent(
 
 	if strings.TrimSpace(event.EntityID) == "" {
 		return nil, errors.New("entity_id is required")
-	}
-
-	if event.ID == "" {
-		event.ID = uuid.NewString()
 	}
 
 	if event.OccurredAt.IsZero() {

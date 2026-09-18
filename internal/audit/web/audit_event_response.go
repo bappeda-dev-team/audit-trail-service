@@ -7,7 +7,7 @@ import (
 )
 
 type AuditEventResponse struct {
-	ID string `json:"id" example:"8f4a2c1e-7b9d-4e62-a3f1-91d8c5b2e704"`
+	ID int `json:"id" example:"100"`
 
 	ProjectId string `json:"project_id" example:"mahulu"`
 	EventType string `json:"event_type" example:"DATA_CHANGED"`
