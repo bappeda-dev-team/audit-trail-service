@@ -39,6 +39,7 @@ func (app *Application) CreateEventHandler(
 	}
 
 	event := domain.AuditEvent{
+		ProjectId:     req.ProjectId,
 		EventType:     req.EventType,
 		Action:        domain.AuditAction(req.Action),
 		ServiceName:   req.ServiceName,
@@ -109,6 +110,7 @@ func (app *Application) CreateEventHandler(
 // @Produce     json
 //
 // @Param       service_name   query string false "Nama service"
+// @Param       project_id     query string false "Id Project"
 // @Param       event_type     query string false "Tipe event"
 // @Param       action         query string false "Action: CREATE, UPDATE, DELETE"
 // @Param       entity_type    query string false "Tipe entity"
@@ -138,6 +140,7 @@ func (app *Application) FindEventHandler(
 
 	filter := domain.AuditEventFilter{
 		ServiceName:   req.ServiceName,
+		ProjectId:     req.ProjectId,
 		EventType:     req.EventType,
 		EntityType:    req.EntityType,
 		EntityID:      req.EntityID,

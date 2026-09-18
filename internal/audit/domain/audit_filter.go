@@ -4,6 +4,7 @@ import "time"
 
 type AuditEventFilter struct {
 	ServiceName   string
+	ProjectId     string
 	EventType     string
 	Action        *AuditAction
 	EntityType    string

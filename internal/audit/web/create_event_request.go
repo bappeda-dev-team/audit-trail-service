@@ -3,6 +3,7 @@ package web
 import "time"
 
 type CreateEventRequest struct {
+	ProjectId string `json:"project_id"`
 	EventType string `json:"event_type"`
 	Action    string `json:"action"`
 

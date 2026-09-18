@@ -40,6 +40,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "Id Project",
+                        "name": "project_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "Tipe event",
                         "name": "event_type",
                         "in": "query"
@@ -257,6 +263,10 @@ const docTemplate = `{
                     "type": "string",
                     "example": "2026-09-17T08:00:00+07:00"
                 },
+                "project_id": {
+                    "type": "string",
+                    "example": "mahulu"
+                },
                 "request_id": {
                     "type": "string",
                     "example": "req-004"
@@ -299,6 +309,9 @@ const docTemplate = `{
                     "additionalProperties": {}
                 },
                 "occurred_at": {
+                    "type": "string"
+                },
+                "project_id": {
                     "type": "string"
                 },
                 "request_id": {

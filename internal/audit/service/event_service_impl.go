@@ -35,6 +35,10 @@ func (service *EventServiceImpl) CreateEvent(
 ) (*domain.AuditEvent, error) {
 	const op = "audit.service.CreateEvent"
 
+	if strings.TrimSpace(event.ProjectId) == "" {
+		return nil, errors.New("project_id is required")
+	}
+
 	if strings.TrimSpace(event.EventType) == "" {
 		return nil, errors.New("event_type is required")
 	}

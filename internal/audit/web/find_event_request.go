@@ -7,6 +7,7 @@ import (
 
 type FindEventRequest struct {
 	ServiceName   string
+	ProjectId     string
 	EventType     string
 	Action        string
 	EntityType    string
@@ -26,6 +27,7 @@ type FindEventRequest struct {
 func NewFindEventRequest(query url.Values) FindEventRequest {
 	return FindEventRequest{
 		ServiceName:   query.Get("service_name"),
+		ProjectId:     query.Get("project_id"),
 		EventType:     query.Get("event_type"),
 		Action:        query.Get("action"),
 		EntityType:    query.Get("entity_type"),

@@ -30,6 +30,7 @@ func (repo *EventRepositoryImpl) Create(
 	query := `
 		INSERT INTO audit_event (
 			id,
+			project_id,
 			event_type,
 			action,
 			service_name,
@@ -58,7 +59,8 @@ func (repo *EventRepositoryImpl) Create(
 			$11,
 			$12,
 			$13,
-			$14
+			$14,
+			$15
 		)
 	`
 
@@ -66,6 +68,7 @@ func (repo *EventRepositoryImpl) Create(
 		ctx,
 		query,
 		event.ID,
+		event.ProjectId,
 		event.EventType,
 		event.Action,
 		event.ServiceName,
@@ -96,6 +99,7 @@ func (repo *EventRepositoryImpl) FindAll(
 	query := `
 		SELECT
 			id,
+			project_id,
 			event_type,
 			action,
 			service_name,
@@ -132,6 +136,13 @@ func (repo *EventRepositoryImpl) FindAll(
 		addCondition(
 			"service_name = $%d",
 			filter.ServiceName,
+		)
+	}
+
+	if filter.ProjectId != "" {
+		addCondition(
+			"project_id = $%d",
+			filter.ProjectId,
 		)
 	}
 
@@ -250,6 +261,7 @@ func (repo *EventRepositoryImpl) FindAll(
 
 		err := rows.Scan(
 			&event.ID,
+			&event.ProjectId,
 			&event.EventType,
 			&event.Action,
 			&event.ServiceName,

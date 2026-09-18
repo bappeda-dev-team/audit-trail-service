@@ -35,6 +35,9 @@ definitions:
       occurred_at:
         example: "2026-09-17T08:00:00+07:00"
         type: string
+      project_id:
+        example: mahulu
+        type: string
       request_id:
         example: req-004
         type: string
@@ -65,6 +68,8 @@ definitions:
         additionalProperties: {}
         type: object
       occurred_at:
+        type: string
+      project_id:
         type: string
       request_id:
         type: string
@@ -135,6 +140,10 @@ paths:
       - description: Nama service
         in: query
         name: service_name
+        type: string
+      - description: Id Project
+        in: query
+        name: project_id
         type: string
       - description: Tipe event
         in: query

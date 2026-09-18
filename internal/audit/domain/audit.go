@@ -16,6 +16,7 @@ const (
 type AuditEvent struct {
 	ID string
 
+	ProjectId string
 	EventType string
 	Action    AuditAction
 
